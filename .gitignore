@@ -2,4 +2,6 @@ assets/config.js
 .env
 scripts/.env
 parcels.csv
+zoning.csv
+flooding_hazard.csv
 data/**/*.jsonl

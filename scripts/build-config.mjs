@@ -90,31 +90,31 @@ const config = `window.SUPABASE_CONFIG = ${JSON.stringify({
     {
       id: "parcels",
       label: "Parcels",
-      table: "parcels",
+      table: "parcels_view",
       searchColumns: ["owner", "street", "parcel_num", "par_id"],
       defaultColumns: ["parcel_num", "par_id", "owner", "streetnumb", "streetname", "street", "city", "state", "zip", "zoning", "gis_acres", "year_built"],
-      hiddenColumns: ["geom"],
+      hiddenColumns: ["geom", "geom_geojson"],
       zoningColumn: "zoning",
       acresColumn: "gis_acres",
-      geometryColumn: "geom"
+      geometryColumn: "geom_geojson"
     },
     {
       id: "zoning",
       label: "Zoning",
-      table: "zoning",
+      table: "zoning_view",
       searchColumns: ["zoning", "zonelabel"],
       defaultColumns: ["zoning", "zonelabel", "objectid"],
-      hiddenColumns: ["geom"],
-      geometryColumn: "geom"
+      hiddenColumns: ["geom", "geom_geojson"],
+      geometryColumn: "geom_geojson"
     },
     {
       id: "flooding_hazard",
       label: "Flooding Hazard",
-      table: "flooding_hazard",
+      table: "flooding_hazard_view",
       searchColumns: ["zone_subty", "objectid"],
       defaultColumns: ["zone_subty", "objectid"],
-      hiddenColumns: ["geom"],
-      geometryColumn: "geom"
+      hiddenColumns: ["geom", "geom_geojson"],
+      geometryColumn: "geom_geojson"
     }
   ],
   savedViews: {
