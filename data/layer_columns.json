@@ -1,0 +1,519 @@
+{
+  "00_City_Boundary.jsonl": {
+    "columns": [
+      "Descriptio",
+      "Location",
+      "OBJECTID",
+      "SHAPE_1_Ar",
+      "SHAPE_1_Le",
+      "Source"
+    ],
+    "geometry_types": [
+      "Polygon"
+    ],
+    "column_count": 6
+  },
+  "01_Parcels.jsonl": {
+    "columns": [
+      "AC",
+      "Account_Nu",
+      "Area_1",
+      "Area_feet",
+      "Assessme_1",
+      "Assessment",
+      "Attached_G",
+      "Basement_S",
+      "Baths",
+      "Bedrooms",
+      "Billing_Da",
+      "Billing__1",
+      "Billing__2",
+      "Billing__3",
+      "Card_num",
+      "Census_Tra",
+      "City",
+      "City_Ward",
+      "Condition",
+      "Date_of_Da",
+      "Deck_Patio",
+      "Deed_Book",
+      "Deed_Page",
+      "Detached_G",
+      "Document",
+      "Document_2",
+      "Document_3",
+      "Effective_",
+      "Elementary",
+      "Enclosed_P",
+      "Enterprise",
+      "Exterior_W",
+      "Finished_S",
+      "Fireplace",
+      "Foundation",
+      "Frame",
+      "GIS_Acres",
+      "Grantor",
+      "Half_Baths",
+      "Heat_Type",
+      "High_Schoo",
+      "Image_Path",
+      "Improvem_1",
+      "Improvem_2",
+      "Improvem_3",
+      "Improvemen",
+      "Land_3",
+      "Land_4",
+      "Land_5",
+      "Land_Value",
+      "Legal_Acre",
+      "Legal_Desc",
+      "Local_Hist",
+      "Lot_Depth",
+      "Lot_Front",
+      "Middle_Sch",
+      "National_H",
+      "OBJECTID_1",
+      "ObjectID",
+      "Open_Porch",
+      "Opportunit",
+      "Owner",
+      "Owner_2",
+      "Owner_Ma_1",
+      "Owner_Ma_2",
+      "Owner_Ma_3",
+      "Owner_Mail",
+      "PAR_ID",
+      "POLY_AREA",
+      "PREMISE",
+      "Parcel",
+      "Parcel_Num",
+      "Petersburg_DBO_Parcels_area",
+      "Polling_Pl",
+      "Pre_Billin",
+      "Pre_Improv",
+      "Pre_Land",
+      "Pre_Reason",
+      "Pre_Total",
+      "Pre_Valuat",
+      "Previous_1",
+      "Previous_2",
+      "Previous_O",
+      "Property_1",
+      "Property_U",
+      "Quality",
+      "Reason",
+      "Reason_3",
+      "Reason_4",
+      "Reason_5",
+      "Roof_Type",
+      "Rooms",
+      "STREET",
+      "Sale_Date",
+      "Sale_Date1",
+      "Sale_Date_",
+      "Sale_Pri_1",
+      "Sale_Pri_2",
+      "Sale_Price",
+      "Sale_Type",
+      "Sale_Type1",
+      "Sale_Type_",
+      "Shape_Leng",
+      "Shed",
+      "Sketch_Pat",
+      "State",
+      "State_Cl_1",
+      "State_Clas",
+      "Stories",
+      "StreetName",
+      "StreetNumb",
+      "Street_Nam",
+      "Subdivis_1",
+      "Subdivisio",
+      "Total_3",
+      "Total_4",
+      "Total_5",
+      "Total_Valu",
+      "US_Congres",
+      "Utilities",
+      "VA_House_D",
+      "VA_Senate_",
+      "Valuatio_1",
+      "Valuatio_2",
+      "Valuation1",
+      "Valuation_",
+      "Year_Built",
+      "Zip",
+      "Zoning",
+      "Zoning_Nam"
+    ],
+    "geometry_types": [
+      "Polygon"
+    ],
+    "column_count": 130
+  },
+  "02_Subdivisions.jsonl": {
+    "columns": [
+      "OBJECTID",
+      "Shape_Leng",
+      "subdivis_1",
+      "subdivisio"
+    ],
+    "geometry_types": [
+      "Polygon"
+    ],
+    "column_count": 4
+  },
+  "03_Zoning.jsonl": {
+    "columns": [
+      "OBJECTID",
+      "Petersburg.DBO.Zoning.Area",
+      "Shape_Leng",
+      "ZONING",
+      "ZoneLabel"
+    ],
+    "geometry_types": [
+      "Polygon"
+    ],
+    "column_count": 5
+  },
+  "04_Federal_State_Historic_Districts.jsonl": {
+    "columns": [
+      "District_N",
+      "OBJECTID",
+      "Shape_Leng",
+      "state"
+    ],
+    "geometry_types": [
+      "Polygon"
+    ],
+    "column_count": 4
+  },
+  "05_Local_Historic_Districts.jsonl": {
+    "columns": [
+      "District",
+      "OBJECTID",
+      "Shape_Leng"
+    ],
+    "geometry_types": [
+      "Polygon"
+    ],
+    "column_count": 3
+  },
+  "06_National_Register_Properties.jsonl": {
+    "columns": [
+      "Address",
+      "Build_Date",
+      "Historic_U",
+      "Latitude",
+      "Local_Dist",
+      "Longitude",
+      "NHL_List_D",
+      "NPS_Proper",
+      "NRHP_List_",
+      "Name",
+      "National_D",
+      "National_H",
+      "National_R",
+      "OBJECTID",
+      "Parcel_ID",
+      "URL",
+      "VLR_List_D",
+      "Virginia_L"
+    ],
+    "geometry_types": [
+      "Point"
+    ],
+    "column_count": 18
+  },
+  "07_Enterprise_Zone.jsonl": {
+    "columns": [
+      "OBJECTID",
+      "PAR_ID",
+      "PREMISE",
+      "Parcel_Num",
+      "Petersburg.DBO.EnterpriseZone.area",
+      "STREET",
+      "Shape_Le_1",
+      "Shape_Leng"
+    ],
+    "geometry_types": [
+      "Polygon"
+    ],
+    "column_count": 8
+  },
+  "08_Oppurtunity_Zone.jsonl": {
+    "columns": [
+      "OBJECTID",
+      "Shape_Leng",
+      "Zone"
+    ],
+    "geometry_types": [
+      "Polygon"
+    ],
+    "column_count": 3
+  },
+  "09_Elementary_School_Zone.jsonl": {
+    "columns": [
+      "OBJECTID",
+      "SHAPE_1_Ar",
+      "SHAPE_1_Le",
+      "School",
+      "Source"
+    ],
+    "geometry_types": [
+      "Polygon"
+    ],
+    "column_count": 5
+  },
+  "10_Assessment_Neighborhoods.jsonl": {
+    "columns": [
+      "NEIGH",
+      "OBJECTID",
+      "Shape_Leng"
+    ],
+    "geometry_types": [
+      "Polygon"
+    ],
+    "column_count": 3
+  },
+  "11_Future_Land_Use.jsonl": {
+    "columns": [
+      "Acreage",
+      "LandUse",
+      "OBJECTID",
+      "Shape_Leng"
+    ],
+    "geometry_types": [
+      "Polygon"
+    ],
+    "column_count": 4
+  },
+  "12_Trail_Paths.jsonl": {
+    "columns": [
+      "Id",
+      "OBJECTID",
+      "Type"
+    ],
+    "geometry_types": [
+      "LineString",
+      "MultiLineString"
+    ],
+    "column_count": 3
+  },
+  "13_Flooding_Hazard.jsonl": {
+    "columns": [
+      "OBJECTID",
+      "ZONE_SUBTY"
+    ],
+    "geometry_types": [
+      "Polygon"
+    ],
+    "column_count": 2
+  },
+  "14_Wards.jsonl": {
+    "columns": [
+      "Location",
+      "OBJECTID",
+      "SHAPE_1_Ar",
+      "SHAPE_1_Le",
+      "Source",
+      "Ward_Numbe"
+    ],
+    "geometry_types": [
+      "Polygon"
+    ],
+    "column_count": 6
+  },
+  "15_Contours.jsonl": {
+    "columns": [
+      "DocName",
+      "Elevation",
+      "LineType",
+      "OBJECTID",
+      "Shape_Leng",
+      "Source"
+    ],
+    "geometry_types": [
+      "LineString",
+      "MultiLineString"
+    ],
+    "column_count": 6
+  },
+  "16_Parks___Conserved_Areas.jsonl": {
+    "columns": [
+      "Area_feet",
+      "OBJECTID",
+      "OBJECTID_12",
+      "ObjectID_1",
+      "PAR_ID",
+      "PAR_ID_1",
+      "POLY_AREA",
+      "PREMISE",
+      "PREMISE_1",
+      "Parcel_Num",
+      "Petersburg.DBO.Parks_ConservedAreas.area",
+      "STREET",
+      "STREET_1",
+      "Shape_Ar_1",
+      "Shape_Le_1",
+      "Shape_Leng",
+      "Zoning",
+      "Zoning_Nam"
+    ],
+    "geometry_types": [
+      "Polygon"
+    ],
+    "column_count": 18
+  },
+  "17_Chesapeake_Bay_Preservation_Areas.jsonl": {
+    "columns": [
+      "NAME",
+      "OBJECTID",
+      "Preservati",
+      "Shape_Leng",
+      "Source"
+    ],
+    "geometry_types": [
+      "Polygon"
+    ],
+    "column_count": 5
+  },
+  "parcels.jsonl": {
+    "columns": [
+      "AC",
+      "Account_Nu",
+      "Area_1",
+      "Area_feet",
+      "Assessme_1",
+      "Assessment",
+      "Attached_G",
+      "Basement_S",
+      "Baths",
+      "Bedrooms",
+      "Billing_Da",
+      "Billing__1",
+      "Billing__2",
+      "Billing__3",
+      "Card_num",
+      "Census_Tra",
+      "City",
+      "City_Ward",
+      "Condition",
+      "Date_of_Da",
+      "Deck_Patio",
+      "Deed_Book",
+      "Deed_Page",
+      "Detached_G",
+      "Document",
+      "Document_2",
+      "Document_3",
+      "Effective_",
+      "Elementary",
+      "Enclosed_P",
+      "Enterprise",
+      "Exterior_W",
+      "Finished_S",
+      "Fireplace",
+      "Foundation",
+      "Frame",
+      "GIS_Acres",
+      "Grantor",
+      "Half_Baths",
+      "Heat_Type",
+      "High_Schoo",
+      "Image_Path",
+      "Improvem_1",
+      "Improvem_2",
+      "Improvem_3",
+      "Improvemen",
+      "Land_3",
+      "Land_4",
+      "Land_5",
+      "Land_Value",
+      "Legal_Acre",
+      "Legal_Desc",
+      "Local_Hist",
+      "Lot_Depth",
+      "Lot_Front",
+      "Middle_Sch",
+      "National_H",
+      "OBJECTID_1",
+      "ObjectID",
+      "Open_Porch",
+      "Opportunit",
+      "Owner",
+      "Owner_2",
+      "Owner_Ma_1",
+      "Owner_Ma_2",
+      "Owner_Ma_3",
+      "Owner_Mail",
+      "PAR_ID",
+      "POLY_AREA",
+      "PREMISE",
+      "Parcel",
+      "Parcel_Num",
+      "Petersburg_DBO_Parcels_area",
+      "Polling_Pl",
+      "Pre_Billin",
+      "Pre_Improv",
+      "Pre_Land",
+      "Pre_Reason",
+      "Pre_Total",
+      "Pre_Valuat",
+      "Previous_1",
+      "Previous_2",
+      "Previous_O",
+      "Property_1",
+      "Property_U",
+      "Quality",
+      "Reason",
+      "Reason_3",
+      "Reason_4",
+      "Reason_5",
+      "Roof_Type",
+      "Rooms",
+      "STREET",
+      "Sale_Date",
+      "Sale_Date1",
+      "Sale_Date_",
+      "Sale_Pri_1",
+      "Sale_Pri_2",
+      "Sale_Price",
+      "Sale_Type",
+      "Sale_Type1",
+      "Sale_Type_",
+      "Shape_Leng",
+      "Shed",
+      "Sketch_Pat",
+      "State",
+      "State_Cl_1",
+      "State_Clas",
+      "Stories",
+      "StreetName",
+      "StreetNumb",
+      "Street_Nam",
+      "Subdivis_1",
+      "Subdivisio",
+      "Total_3",
+      "Total_4",
+      "Total_5",
+      "Total_Valu",
+      "US_Congres",
+      "Utilities",
+      "VA_House_D",
+      "VA_Senate_",
+      "Valuatio_1",
+      "Valuatio_2",
+      "Valuation1",
+      "Valuation_",
+      "Year_Built",
+      "Zip",
+      "Zoning",
+      "Zoning_Nam"
+    ],
+    "geometry_types": [
+      "Polygon"
+    ],
+    "column_count": 130
+  }
+}

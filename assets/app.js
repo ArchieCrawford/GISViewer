@@ -2,6 +2,7 @@ import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 
 const STORE_VIEWS = "pg_views_v3";
 const STORE_COLUMNS = "pg_columns_v1";
+const COLUMN_PREFS_VERSION = 2;
 const QUERY_LIMIT = 1000;
 
 const els = {
@@ -165,7 +166,10 @@ function normalizeLayer(d) {
     zoningColumn: d.zoningColumn,
     acresColumn: d.acresColumn,
     geometryColumn: d.geometryColumn,
-    columns: d.columns
+    columns: d.columns,
+    defaultColumns: d.defaultColumns,
+    hiddenColumns: d.hiddenColumns,
+    columnOrder: d.columnOrder
   };
 }
 
@@ -288,7 +292,7 @@ function buildFilterUI(cols, dataset) {
 
 function resolveSearchColumns(cols, dataset) {
   if (dataset?.searchColumns && dataset.searchColumns.length) {
-    return dataset.searchColumns.filter(c => cols.includes(c));
+    return mapColumnNames(cols, dataset.searchColumns);
   }
   const preferred = [];
   for (const c of cols) {
@@ -306,19 +310,82 @@ function resolveSearchColumns(cols, dataset) {
 }
 
 function resolveZoningColumn(cols, dataset) {
-  if (dataset?.zoningColumn && cols.includes(dataset.zoningColumn)) return dataset.zoningColumn;
+  if (dataset?.zoningColumn) {
+    const match = findColumnName(cols, dataset.zoningColumn);
+    if (match) return match;
+  }
   return cols.find(c => /zone|zoning|district/i.test(c));
 }
 
 function resolveAcresColumn(cols, dataset) {
-  if (dataset?.acresColumn && cols.includes(dataset.acresColumn)) return dataset.acresColumn;
+  if (dataset?.acresColumn) {
+    const match = findColumnName(cols, dataset.acresColumn);
+    if (match) return match;
+  }
   return cols.find(c => /acre|acres|area/i.test(c) && !/shape/i.test(c));
 }
 
-function getDatasetColumnPrefs() {
+function resolveGeometryColumn(cols, dataset) {
+  if (dataset?.geometryColumn) {
+    const match = findColumnName(cols, dataset.geometryColumn);
+    if (match) return match;
+  }
+  return cols.find(c => /geom|geometry|shape/i.test(c));
+}
+
+function findColumnName(cols, name) {
+  const target = String(name || "").toLowerCase();
+  for (const c of cols) {
+    if (c.toLowerCase() === target) return c;
+  }
+  return null;
+}
+
+function mapColumnNames(cols, names) {
+  return (names || [])
+    .map(name => findColumnName(cols, name))
+    .filter(Boolean);
+}
+
+function getDatasetColumnPrefs(allCols) {
   const id = activeDataset?.id || "default";
-  if (!columnPrefs[id]) columnPrefs[id] = { order: [], hidden: [] };
-  return columnPrefs[id];
+  if (!columnPrefs[id] || columnPrefs[id].version !== COLUMN_PREFS_VERSION) {
+    columnPrefs[id] = { order: [], hidden: [], version: COLUMN_PREFS_VERSION, seeded: false };
+  }
+  const prefs = columnPrefs[id];
+  if (!prefs.seeded && Array.isArray(allCols) && allCols.length) {
+    const seeded = applyDefaultColumnPrefs(allCols);
+    prefs.order = seeded.order;
+    prefs.hidden = seeded.hidden;
+    prefs.seeded = true;
+    saveColumnPrefs();
+  }
+  return prefs;
+}
+
+function applyDefaultColumnPrefs(allCols) {
+  const defaultCols = Array.isArray(activeDataset?.defaultColumns)
+    ? mapColumnNames(allCols, activeDataset.defaultColumns)
+    : [];
+  const hiddenCols = Array.isArray(activeDataset?.hiddenColumns)
+    ? mapColumnNames(allCols, activeDataset.hiddenColumns)
+    : [];
+  const orderCols = Array.isArray(activeDataset?.columnOrder)
+    ? mapColumnNames(allCols, activeDataset.columnOrder)
+    : [];
+
+  const baseOrder = orderCols.length ? orderCols : defaultCols;
+  let order = buildColumnOrder(allCols, { order: baseOrder });
+  order = moveGeometryToEnd(order);
+
+  const hidden = new Set(hiddenCols);
+  if (defaultCols.length) {
+    for (const c of allCols) {
+      if (!defaultCols.includes(c)) hidden.add(c);
+    }
+  }
+
+  return { order, hidden: Array.from(hidden) };
 }
 
 function buildColumnOrder(allCols, prefs) {
@@ -332,12 +399,18 @@ function buildColumnOrder(allCols, prefs) {
   return base.concat(rest);
 }
 
+function moveGeometryToEnd(cols) {
+  const nonGeom = cols.filter(c => !isGeometryColumn(c));
+  const geom = cols.filter(c => isGeometryColumn(c));
+  return nonGeom.concat(geom);
+}
+
 function isGeometryColumn(name) {
   return /geom|geometry|shape|geom_geojson/i.test(name);
 }
 
 function getColumnState(allCols) {
-  const prefs = getDatasetColumnPrefs();
+  const prefs = getDatasetColumnPrefs(allCols);
   const order = buildColumnOrder(allCols, prefs);
   const hidden = new Set((prefs.hidden || []).filter(c => allCols.includes(c)));
   return { order, hidden };
@@ -346,7 +419,7 @@ function getColumnState(allCols) {
 function renderColumnManager(cols) {
   if (!els.colList) return;
   columnManagerCols = Array.isArray(cols) ? cols.slice() : [];
-  const prefs = getDatasetColumnPrefs();
+  const prefs = getDatasetColumnPrefs(columnManagerCols);
   const order = buildColumnOrder(columnManagerCols, prefs);
   const hiddenSet = new Set((prefs.hidden || []).filter(c => columnManagerCols.includes(c)));
 
@@ -370,7 +443,7 @@ function renderColumnManager(cols) {
     checkbox.className = "colToggle";
     checkbox.checked = !hiddenSet.has(col);
     checkbox.addEventListener("change", () => {
-      const prefsNow = getDatasetColumnPrefs();
+      const prefsNow = getDatasetColumnPrefs(columnManagerCols);
       const hidden = new Set(prefsNow.hidden || []);
       if (checkbox.checked) hidden.delete(col);
       else hidden.add(col);
@@ -410,7 +483,7 @@ function renderColumnManager(cols) {
       const from = e.dataTransfer.getData("text/plain");
       const to = row.dataset.col;
       if (!from || !to || from === to) return;
-      const prefsNow = getDatasetColumnPrefs();
+      const prefsNow = getDatasetColumnPrefs(columnManagerCols);
       const next = buildColumnOrder(columnManagerCols, prefsNow).filter(c => c !== from);
       const idx = next.indexOf(to);
       if (idx === -1) return;
@@ -430,7 +503,7 @@ function renderColumnManager(cols) {
       if (e.target.closest(".colRow")) return;
       const from = e.dataTransfer.getData("text/plain");
       if (!from) return;
-      const prefsNow = getDatasetColumnPrefs();
+      const prefsNow = getDatasetColumnPrefs(columnManagerCols);
       const next = buildColumnOrder(columnManagerCols, prefsNow).filter(c => c !== from);
       next.push(from);
       prefsNow.order = next;
@@ -669,7 +742,7 @@ function normalizeGeometry(val) {
 }
 
 function extractGeometry(row, cols) {
-  const preferred = activeDataset?.geometryColumn;
+  const preferred = resolveGeometryColumn(cols, activeDataset);
   const candidates = [];
   if (preferred) candidates.push(preferred);
   for (const c of cols) {
@@ -695,7 +768,10 @@ function extractGeometry(row, cols) {
 
 function renderMap(tbl) {
   geoLayer.clearLayers();
-  if (!tbl.cols.length) { els.btnFit.disabled = true; return; }
+  if (!tbl.cols.length) { els.btnFit.disabled = true; return { featureCount: 0, hasGeom: false }; }
+
+  const geomCol = resolveGeometryColumn(tbl.cols, activeDataset);
+  if (!geomCol) { els.btnFit.disabled = true; return { featureCount: 0, hasGeom: false }; }
 
   const features = [];
   const max = Math.min(tbl.rows.length, QUERY_LIMIT);
@@ -706,6 +782,7 @@ function renderMap(tbl) {
   }
   geoLayer.addData(features);
   els.btnFit.disabled = features.length === 0;
+  return { featureCount: features.length, hasGeom: true };
 }
 
 async function runQueryFromFilters() {
@@ -722,13 +799,14 @@ async function runQueryFromFilters() {
   const tbl = tableFromRows(rows);
   lastResult = tbl;
   renderTable(tbl);
-  renderMap(tbl);
+  const mapInfo = renderMap(tbl);
   renderColumnManager(tbl.cols);
   const countLabel = typeof count === "number" ? ` (of ~${count})` : "";
   const { order, hidden } = getColumnState(tbl.cols);
   const visibleCount = order.filter(c => !hidden.has(c)).length;
   const colLabel = visibleCount === tbl.cols.length ? `${tbl.cols.length}` : `${visibleCount}/${tbl.cols.length}`;
-  els.resultMeta.textContent = `Rows: ${rows.length}${countLabel} · Columns: ${colLabel}`;
+  const mapLabel = mapInfo?.hasGeom && mapInfo.featureCount === 0 ? " · Map: no geometries parsed" : "";
+  els.resultMeta.textContent = `Rows: ${rows.length}${countLabel} · Columns: ${colLabel}${mapLabel}`;
   els.btnExport.disabled = rows.length === 0;
   setStatus("Ready.");
   updateLayerMeta();
@@ -838,13 +916,14 @@ async function runSql(sql) {
   const tbl = tableFromRows(rows);
   lastResult = tbl;
   renderTable(tbl);
-  renderMap(tbl);
+  const mapInfo = renderMap(tbl);
   renderColumnManager(tbl.cols);
   els.btnExport.disabled = rows.length === 0;
   const { order, hidden } = getColumnState(tbl.cols);
   const visibleCount = order.filter(c => !hidden.has(c)).length;
   const colLabel = visibleCount === tbl.cols.length ? `${tbl.cols.length}` : `${visibleCount}/${tbl.cols.length}`;
-  els.resultMeta.textContent = `Rows: ${rows.length} · Columns: ${colLabel}`;
+  const mapLabel = mapInfo?.hasGeom && mapInfo.featureCount === 0 ? " · Map: no geometries parsed" : "";
+  els.resultMeta.textContent = `Rows: ${rows.length} · Columns: ${colLabel}${mapLabel}`;
   setStatus("Ready.");
 }
 
@@ -882,7 +961,7 @@ function wireEvents() {
   });
 
   els.btnColsShowAll.addEventListener("click", () => {
-    const prefs = getDatasetColumnPrefs();
+    const prefs = getDatasetColumnPrefs(columnManagerCols);
     prefs.hidden = [];
     saveColumnPrefs();
     if (lastResult) renderTable(lastResult);
@@ -890,9 +969,10 @@ function wireEvents() {
   });
 
   els.btnColsReset.addEventListener("click", () => {
-    const prefs = getDatasetColumnPrefs();
+    const prefs = getDatasetColumnPrefs(columnManagerCols);
     prefs.hidden = [];
     prefs.order = [];
+    prefs.seeded = false;
     saveColumnPrefs();
     if (lastResult) renderTable(lastResult);
     renderColumnManager(lastResult?.cols || activeColumns);

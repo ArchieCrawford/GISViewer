@@ -91,7 +91,9 @@ const config = `window.SUPABASE_CONFIG = ${JSON.stringify({
       id: "parcels",
       label: "Parcels",
       table: "parcels",
-      searchColumns: ["owner", "street", "parcel_num"],
+      searchColumns: ["owner", "street", "parcel_num", "par_id"],
+      defaultColumns: ["parcel_num", "par_id", "owner", "streetnumb", "streetname", "street", "city", "state", "zip", "zoning", "gis_acres", "year_built"],
+      hiddenColumns: ["geom"],
       zoningColumn: "zoning",
       acresColumn: "gis_acres",
       geometryColumn: "geom"
@@ -100,12 +102,18 @@ const config = `window.SUPABASE_CONFIG = ${JSON.stringify({
       id: "zoning",
       label: "Zoning",
       table: "zoning",
+      searchColumns: ["zoning", "zonelabel"],
+      defaultColumns: ["zoning", "zonelabel", "objectid"],
+      hiddenColumns: ["geom"],
       geometryColumn: "geom"
     },
     {
       id: "flooding_hazard",
       label: "Flooding Hazard",
       table: "flooding_hazard",
+      searchColumns: ["zone_subty", "objectid"],
+      defaultColumns: ["zone_subty", "objectid"],
+      hiddenColumns: ["geom"],
       geometryColumn: "geom"
     }
   ],
