@@ -93,7 +93,7 @@ const config = `window.SUPABASE_CONFIG = ${JSON.stringify({
       table: "parcels_view",
       searchColumns: ["owner", "street", "parcel_num", "par_id"],
       defaultColumns: ["parcel_num", "par_id", "owner", "streetnumb", "streetname", "street", "city", "state", "zip", "zoning", "gis_acres", "year_built"],
-      hiddenColumns: ["geom", "geom_geojson"],
+      hiddenColumns: ["geom", "geom_geojson", "geom_esri"],
       zoningColumn: "zoning",
       acresColumn: "gis_acres",
       geometryColumn: "geom_geojson"
@@ -104,7 +104,7 @@ const config = `window.SUPABASE_CONFIG = ${JSON.stringify({
       table: "zoning_view",
       searchColumns: ["zoning", "zonelabel"],
       defaultColumns: ["zoning", "zonelabel", "objectid"],
-      hiddenColumns: ["geom", "geom_geojson"],
+      hiddenColumns: ["geom", "geom_geojson", "geom_esri"],
       geometryColumn: "geom_geojson"
     },
     {
@@ -113,7 +113,142 @@ const config = `window.SUPABASE_CONFIG = ${JSON.stringify({
       table: "flooding_hazard_view",
       searchColumns: ["zone_subty", "objectid"],
       defaultColumns: ["zone_subty", "objectid"],
-      hiddenColumns: ["geom", "geom_geojson"],
+      hiddenColumns: ["geom", "geom_geojson", "geom_esri"],
+      geometryColumn: "geom_geojson"
+    },
+    {
+      id: "city_boundary",
+      label: "City Boundary",
+      table: "city_boundary_view",
+      searchColumns: ["location", "descriptio", "source"],
+      defaultColumns: ["location", "descriptio", "source"],
+      hiddenColumns: ["geom", "geom_geojson", "geom_esri"],
+      geometryColumn: "geom_geojson"
+    },
+    {
+      id: "subdivisions",
+      label: "Subdivisions",
+      table: "subdivisions_view",
+      searchColumns: ["subdivisio", "subdivis_1"],
+      defaultColumns: ["subdivisio", "subdivis_1", "objectid"],
+      hiddenColumns: ["geom", "geom_geojson", "geom_esri"],
+      geometryColumn: "geom_geojson"
+    },
+    {
+      id: "federal_state_historic_districts",
+      label: "Federal/State Historic Districts",
+      table: "federal_state_historic_districts_view",
+      searchColumns: ["district_n", "state"],
+      defaultColumns: ["district_n", "state", "objectid"],
+      hiddenColumns: ["geom", "geom_geojson", "geom_esri"],
+      geometryColumn: "geom_geojson"
+    },
+    {
+      id: "local_historic_districts",
+      label: "Local Historic Districts",
+      table: "local_historic_districts_view",
+      searchColumns: ["district", "objectid"],
+      defaultColumns: ["district", "objectid"],
+      hiddenColumns: ["geom", "geom_geojson", "geom_esri"],
+      geometryColumn: "geom_geojson"
+    },
+    {
+      id: "national_register_properties",
+      label: "National Register Properties",
+      table: "national_register_properties_view",
+      searchColumns: ["name", "address", "parcel_id"],
+      defaultColumns: ["name", "address", "parcel_id", "historic_u", "build_date", "national_r", "nps_proper"],
+      hiddenColumns: ["geom", "geom_geojson", "geom_esri"],
+      geometryColumn: "geom_geojson"
+    },
+    {
+      id: "enterprise_zone",
+      label: "Enterprise Zone",
+      table: "enterprise_zone_view",
+      searchColumns: ["parcel_num", "par_id", "premise", "street"],
+      defaultColumns: ["parcel_num", "par_id", "premise", "street"],
+      hiddenColumns: ["geom", "geom_geojson", "geom_esri"],
+      geometryColumn: "geom_geojson"
+    },
+    {
+      id: "oppurtunity_zone",
+      label: "Opportunity Zone",
+      table: "oppurtunity_zone_view",
+      searchColumns: ["zone", "objectid"],
+      defaultColumns: ["zone", "objectid"],
+      hiddenColumns: ["geom", "geom_geojson", "geom_esri"],
+      geometryColumn: "geom_geojson"
+    },
+    {
+      id: "elementary_school_zone",
+      label: "Elementary School Zone",
+      table: "elementary_school_zone_view",
+      searchColumns: ["school", "source"],
+      defaultColumns: ["school", "source", "objectid"],
+      hiddenColumns: ["geom", "geom_geojson", "geom_esri"],
+      geometryColumn: "geom_geojson"
+    },
+    {
+      id: "assessment_neighborhoods",
+      label: "Assessment Neighborhoods",
+      table: "assessment_neighborhoods_view",
+      searchColumns: ["neigh", "objectid"],
+      defaultColumns: ["neigh", "objectid"],
+      hiddenColumns: ["geom", "geom_geojson", "geom_esri"],
+      geometryColumn: "geom_geojson"
+    },
+    {
+      id: "future_land_use",
+      label: "Future Land Use",
+      table: "future_land_use_view",
+      searchColumns: ["landuse", "objectid"],
+      defaultColumns: ["landuse", "acreage", "objectid"],
+      hiddenColumns: ["geom", "geom_geojson", "geom_esri"],
+      geometryColumn: "geom_geojson"
+    },
+    {
+      id: "trail_paths",
+      label: "Trail Paths",
+      table: "trail_paths_view",
+      searchColumns: ["type", "objectid"],
+      defaultColumns: ["type", "objectid"],
+      hiddenColumns: ["geom", "geom_geojson", "geom_esri"],
+      geometryColumn: "geom_geojson"
+    },
+    {
+      id: "wards",
+      label: "Wards",
+      table: "wards_view",
+      searchColumns: ["ward_numbe", "location"],
+      defaultColumns: ["ward_numbe", "location", "source", "objectid"],
+      hiddenColumns: ["geom", "geom_geojson", "geom_esri"],
+      geometryColumn: "geom_geojson"
+    },
+    {
+      id: "contours",
+      label: "Contours",
+      table: "contours_view",
+      searchColumns: ["elevation", "docname", "linetype"],
+      defaultColumns: ["elevation", "docname", "linetype", "source"],
+      hiddenColumns: ["geom", "geom_geojson", "geom_esri"],
+      geometryColumn: "geom_geojson"
+    },
+    {
+      id: "parks_conserved_areas",
+      label: "Parks / Conserved Areas",
+      table: "parks_conserved_areas_view",
+      searchColumns: ["parcel_num", "par_id", "premise", "street"],
+      defaultColumns: ["parcel_num", "par_id", "premise", "street"],
+      hiddenColumns: ["geom", "geom_geojson", "geom_esri"],
+      geometryColumn: "geom_geojson"
+    },
+    {
+      id: "chesapeake_bay_preservation_areas",
+      label: "Chesapeake Bay Preservation Areas",
+      table: "chesapeake_bay_preservation_areas_view",
+      searchColumns: ["name", "preservati", "source"],
+      defaultColumns: ["name", "preservati", "source", "objectid"],
+      hiddenColumns: ["geom", "geom_geojson", "geom_esri"],
       geometryColumn: "geom_geojson"
     }
   ],

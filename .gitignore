@@ -5,3 +5,4 @@ parcels.csv
 zoning.csv
 flooding_hazard.csv
 data/**/*.jsonl
+data/import/
