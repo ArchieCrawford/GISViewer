@@ -70,7 +70,7 @@ const projectUrl = normalizeProjectUrl(readEnv(
   "PUBLIC_SUPABASE_URL",
   "NEXT_PUBLIC_SUPABASE_URL",
   "SUPABASE_PROJECT_URL"
-) || deriveProjectUrl(readEnv("SUPABASE_DATABASE_URL", "SUPABASE_DB_URL", "SUPABASE_CONNECTION_STRING")));
+));
 
 const anonKey = readEnv(
   "SUPABASE_ANON_KEY",
