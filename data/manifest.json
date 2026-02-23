@@ -1,0 +1,154 @@
+[
+  {
+    "id": "parcels_jsonl",
+    "label": "Parcels",
+    "path": "/data/parcels.jsonl",
+    "format": "jsonl",
+    "bytes": 48864179,
+    "table": "parcels"
+  },
+  {
+    "id": "petersburg_exports_00_city_boundary_jsonl",
+    "label": "City Boundary",
+    "path": "/data/petersburg_exports/00_City_Boundary.jsonl",
+    "format": "jsonl",
+    "bytes": 78158,
+    "table": "layer_00_city_boundary"
+  },
+  {
+    "id": "petersburg_exports_01_parcels_jsonl",
+    "label": "Parcels",
+    "path": "/data/petersburg_exports/01_Parcels.jsonl",
+    "format": "jsonl",
+    "bytes": 48864179,
+    "table": "layer_01_parcels"
+  },
+  {
+    "id": "petersburg_exports_02_subdivisions_jsonl",
+    "label": "Subdivisions",
+    "path": "/data/petersburg_exports/02_Subdivisions.jsonl",
+    "format": "jsonl",
+    "bytes": 3197399,
+    "table": "layer_02_subdivisions"
+  },
+  {
+    "id": "petersburg_exports_03_zoning_jsonl",
+    "label": "Zoning",
+    "path": "/data/petersburg_exports/03_Zoning.jsonl",
+    "format": "jsonl",
+    "bytes": 1110776,
+    "table": "layer_03_zoning"
+  },
+  {
+    "id": "petersburg_exports_04_federal_state_historic_districts_jsonl",
+    "label": "Federal State Historic Districts",
+    "path": "/data/petersburg_exports/04_Federal_State_Historic_Districts.jsonl",
+    "format": "jsonl",
+    "bytes": 68299,
+    "table": "layer_04_federal_state_historic_districts"
+  },
+  {
+    "id": "petersburg_exports_05_local_historic_districts_jsonl",
+    "label": "Local Historic Districts",
+    "path": "/data/petersburg_exports/05_Local_Historic_Districts.jsonl",
+    "format": "jsonl",
+    "bytes": 48846,
+    "table": "layer_05_local_historic_districts"
+  },
+  {
+    "id": "petersburg_exports_06_national_register_properties_jsonl",
+    "label": "National Register Properties",
+    "path": "/data/petersburg_exports/06_National_Register_Properties.jsonl",
+    "format": "jsonl",
+    "bytes": 18427,
+    "table": "layer_06_national_register_properties"
+  },
+  {
+    "id": "petersburg_exports_07_enterprise_zone_jsonl",
+    "label": "Enterprise Zone",
+    "path": "/data/petersburg_exports/07_Enterprise_Zone.jsonl",
+    "format": "jsonl",
+    "bytes": 101017,
+    "table": "layer_07_enterprise_zone"
+  },
+  {
+    "id": "petersburg_exports_08_oppurtunity_zone_jsonl",
+    "label": "Oppurtunity Zone",
+    "path": "/data/petersburg_exports/08_Oppurtunity_Zone.jsonl",
+    "format": "jsonl",
+    "bytes": 4632,
+    "table": "layer_08_oppurtunity_zone"
+  },
+  {
+    "id": "petersburg_exports_09_elementary_school_zone_jsonl",
+    "label": "Elementary School Zone",
+    "path": "/data/petersburg_exports/09_Elementary_School_Zone.jsonl",
+    "format": "jsonl",
+    "bytes": 114964,
+    "table": "layer_09_elementary_school_zone"
+  },
+  {
+    "id": "petersburg_exports_10_assessment_neighborhoods_jsonl",
+    "label": "Assessment Neighborhoods",
+    "path": "/data/petersburg_exports/10_Assessment_Neighborhoods.jsonl",
+    "format": "jsonl",
+    "bytes": 4712740,
+    "table": "layer_10_assessment_neighborhoods"
+  },
+  {
+    "id": "petersburg_exports_11_future_land_use_jsonl",
+    "label": "Future Land Use",
+    "path": "/data/petersburg_exports/11_Future_Land_Use.jsonl",
+    "format": "jsonl",
+    "bytes": 7231978,
+    "table": "layer_11_future_land_use"
+  },
+  {
+    "id": "petersburg_exports_12_trail_paths_jsonl",
+    "label": "Trail Paths",
+    "path": "/data/petersburg_exports/12_Trail_Paths.jsonl",
+    "format": "jsonl",
+    "bytes": 34284,
+    "table": "layer_12_trail_paths"
+  },
+  {
+    "id": "petersburg_exports_13_flooding_hazard_jsonl",
+    "label": "Flooding Hazard",
+    "path": "/data/petersburg_exports/13_Flooding_Hazard.jsonl",
+    "format": "jsonl",
+    "bytes": 12613180,
+    "table": "layer_13_flooding_hazard"
+  },
+  {
+    "id": "petersburg_exports_14_wards_jsonl",
+    "label": "Wards",
+    "path": "/data/petersburg_exports/14_Wards.jsonl",
+    "format": "jsonl",
+    "bytes": 129016,
+    "table": "layer_14_wards"
+  },
+  {
+    "id": "petersburg_exports_15_contours_jsonl",
+    "label": "Contours",
+    "path": "/data/petersburg_exports/15_Contours.jsonl",
+    "format": "jsonl",
+    "bytes": 52659342,
+    "table": "layer_15_contours"
+  },
+  {
+    "id": "petersburg_exports_16_parks_conserved_areas_jsonl",
+    "label": "Parks Conserved Areas",
+    "path": "/data/petersburg_exports/16_Parks___Conserved_Areas.jsonl",
+    "format": "jsonl",
+    "bytes": 2051417,
+    "table": "layer_16_parks_conserved_areas"
+  },
+  {
+    "id": "petersburg_exports_17_chesapeake_bay_preservation_areas_jsonl",
+    "label": "Chesapeake Bay Preservation Areas",
+    "path": "/data/petersburg_exports/17_Chesapeake_Bay_Preservation_Areas.jsonl",
+    "format": "jsonl",
+    "bytes": 419036,
+    "table": "layer_17_chesapeake_bay_preservation_areas"
+  }
+]

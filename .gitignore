@@ -1,0 +1,5 @@
+assets/config.js
+.env
+scripts/.env
+parcels.csv
+data/**/*.jsonl

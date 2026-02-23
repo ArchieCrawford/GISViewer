@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Petersburg GIS Explorer</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">PG</div>
+      <div>
+        <div class="title">Petersburg GIS Explorer</div>
+        <div class="subtitle">Parcels · Zoning · Flood · Saved views · CSV export</div>
+      </div>
+    </div>
+
+    <div class="top-actions">
+      <input id="globalSearch" class="input" placeholder="Search address / parcel ID / owner…" />
+      <button id="btnExport" class="btn btnGood" disabled>Export CSV</button>
+    </div>
+  </header>
+
+  <nav class="tabs" id="layerTabs"></nav>
+
+  <main class="layout">
+    <aside class="panel">
+      <div class="panelHead">
+        <div>
+          <div class="panelTitle">Filters</div>
+          <div class="panelHint" id="activeLayerMeta">Loading…</div>
+        </div>
+        <button id="btnApply" class="btn" disabled>Apply</button>
+      </div>
+
+      <div id="filters" class="filters"></div>
+
+      <div class="panelSection">
+        <div class="panelTitle">Saved Views</div>
+        <div class="panelHint" id="savedViewsHint">Saved on this device.</div>
+        <select id="viewSelect" class="select"></select>
+        <div class="row">
+          <button id="btnSaveView" class="btn" disabled>Save</button>
+          <button id="btnDeleteView" class="btn" disabled>Delete</button>
+        </div>
+      </div>
+
+      <div class="panelSection">
+        <div class="panelTitle">Advanced</div>
+        <div class="panelHint" id="sqlHint">SQL preview (optional).</div>
+        <textarea id="sql" class="textarea mono" spellcheck="false"></textarea>
+        <div class="row">
+          <button id="btnRun" class="btn" disabled>Run SQL</button>
+          <button id="btnReset" class="btn" disabled>Reset</button>
+        </div>
+        <div class="small">Table: <code class="mono" id="activeTableName">—</code>.</div>
+      </div>
+
+      <div class="status" id="status">Initializing…</div>
+    </aside>
+
+    <section class="mapPanel">
+      <div class="panelHead">
+        <div>
+          <div class="panelTitle">Map</div>
+          <div class="panelHint">Up to 1,000 geometries from the current view.</div>
+        </div>
+        <button id="btnFit" class="btn" disabled>Fit</button>
+      </div>
+      <div id="map" class="map"></div>
+    </section>
+
+    <section class="tablePanel">
+      <div class="panelHead">
+        <div>
+          <div class="panelTitle">Results</div>
+          <div class="panelHint" id="resultMeta"></div>
+        </div>
+        <div class="colTools">
+          <input id="colFilter" class="input" placeholder="Filter columns…" />
+          <button id="btnCols" class="btn">Columns</button>
+        </div>
+      </div>
+      <div id="colManager" class="colManager hidden">
+        <div class="colManagerHead">
+          <div class="panelTitle">Columns</div>
+          <div class="colManagerActions">
+            <button id="btnColsShowAll" class="btn btnSmall">Show all</button>
+            <button id="btnColsReset" class="btn btnSmall">Reset</button>
+          </div>
+        </div>
+        <div class="colManagerNote">Drag to reorder, uncheck to hide.</div>
+        <div id="colList" class="colList"></div>
+      </div>
+      <div class="tableWrap">
+        <table id="resultTable"></table>
+      </div>
+    </section>
+  </main>
+
+  <script src="/assets/config.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script type="module" src="/assets/app.js"></script>
+</body>
+</html>
